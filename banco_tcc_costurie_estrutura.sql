@@ -43,7 +43,7 @@ create table tbl_localizacao(
 ##TABELA USUARIO
 create table tbl_usuario(
 	id int auto_increment not null primary key,
-    nome varchar(255) not null,
+    nome varchar(255),
     descricao varchar(255),
     foto varchar(500),
     nome_de_usuario varchar(100) not null,
@@ -56,6 +56,19 @@ create table tbl_usuario(
     constraint FK_Localizacao_Usuario
     foreign key (id_localizacao)
     references tbl_localizacao(id),
+    
+    unique index(id)
+);
+
+##TABELA REDE SOCIAL
+create table tbl_rede_social(
+	id int auto_increment not null primary key,
+    link varchar(500),
+    id_usuario int not null,
+    
+    constraint FK_Usuario_RedeSocial
+    foreign key (id_usuario)
+    references tbl_usuario(id),
     
     unique index(id)
 );
@@ -94,7 +107,9 @@ create table tbl_conversa(
     
     constraint FK_MongoChat_Conversa
     foreign key (id_mongo)
-    references tbl_chat(id_mongo)
+    references tbl_chat(id_mongo),
+    
+    unique index(id)
 );
 
 ##TABELA TAG
@@ -126,7 +141,9 @@ create table tbl_categoria_tag(
     
     constraint FK_Tag_CategoriaTag
     foreign key (id_tag)
-    references tbl_tag(id)
+    references tbl_tag(id),
+    
+    unique index(id)
 );
 
 ##TABELA TAG_USUARIO
@@ -141,11 +158,140 @@ create table tbl_tag_usuario(
     
     constraint FK_Usuario_TagUsuario
     foreign key (id_usuario)
-    references tbl_usuario(id)
+    references tbl_usuario(id),
+    
+    unique index(id)
 );
 
+##TABELA PUBLICACAO
+create table tbl_publicacao(
+	id int auto_increment not null primary key,
+    titulo varchar(45) not null,
+    descricao text not null,
+    anexo varchar(500) not null,
+    data_publicacao date not null,
+    hora time not null, 
+    id_usuario int not null,
+    
+    constraint FK_Usuario_Publicacao
+    foreign key (id_usuario)
+    references tbl_usuario(id),
+    
+    unique index(id)
+);
 
+##TABELA TAG_PUBLICACAO
+create table tbl_tag_publicacao(
+	id int auto_increment not null primary key,
+    id_tag int not null,
+    id_publicacao int not null,
+    
+    constraint FK_Tag_TagPublicacao
+    foreign key (id_tag)
+    references tbl_tag(id),
+    
+    constraint FK_Publicacao_TagPublicacao
+    foreign key (id_publicacao)
+    references tbl_publicacao(id),
+    
+    unique index(id)
+);
 
+##TABELA AVALIACAO
+create table tbl_avaliacao(
+	id int auto_increment not null primary key,
+    quantidade bit,
+    id_tag_publicacao int not null,
+    
+    constraint FK_TagPublicao_Avaliacao
+    foreign key (id_tag_publicacao)
+    references tbl_tag_publicacao(id),
+    
+    unique index(id)
+);
+
+##TABELA COMENTARIO
+create table tbl_comentario(
+	id int auto_increment not null primary key,
+    data_comentario date not null,
+    hora_comentario time not null,
+    mensagem varchar(500) not null,
+    id_publicacao int not null,
+    id_usuario int not null,
+    
+    constraint FK_Publicacao_Comentario
+    foreign key (id_publicacao)
+    references tbl_publicacao(id),
+    
+    constraint FK_Usuario_Comentario
+    foreign key (id_usuario)
+    references tbl_usuario(id),
+    
+    unique index(id)
+);
+
+##TABELA RESPOSTA_COMENTARIO
+create table tbl_resposta_comentario(
+	id int auto_increment not null primary key,
+    data_resposta date not null,
+    hora_resposta time not null,
+    mensagem varchar(255) not null,
+    id_comentario int not null,
+    id_usuario int not null,
+    
+    constraint FK_Comentario_RespostaComentario
+    foreign key (id_comentario)
+    references tbl_comentario(id),
+    
+    constraint FK_Usuario_RespostaComentario
+    foreign key (id_usuario)
+    references tbl_usuario(id),
+    
+    unique index(id)
+);
+
+##TABELA DENUNCIA
+create table tbl_denuncia(
+	id int auto_increment not null primary key,
+    mensagem varchar(500) not null,
+    id_publicacao int,
+    id_usuario int,
+    
+	constraint FK_Publicacao_Denuncia
+    foreign key (id_publicacao)
+    references tbl_publicacao(id),
+    
+    constraint FK_Usuario_Denuncia
+    foreign key (id_usuario)
+    references tbl_usuario(id),
+    
+    unique index(id)
+);
+
+##TABELA TIPO_DENUNCIA
+create table tbl_tipo_denuncia(
+	id int auto_increment not null primary key,
+    tipo varchar(45) not null,
+    
+    unique index(id)
+);
+
+##TABELA DENUNCIA_TIPO_DENUNCIA
+create table tbl_denuncia_tipo_denuncia(
+	id int auto_increment not null primary key,
+    id_denuncia int not null,
+    id_tipo_denuncia int not null,
+    
+    constraint FK_Denuncia_DenunciaTipoDenuncia
+    foreign key (id_denuncia)
+    references tbl_denuncia(id),
+    
+    constraint FK_TipoDenuncia_DenunciaTipoDenuncia
+    foreign key (id_tipo_denuncia)
+    references tbl_tipo_denuncia(id),
+
+	unique index(id)
+);
 
 
 
