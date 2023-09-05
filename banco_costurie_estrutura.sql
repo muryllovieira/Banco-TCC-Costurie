@@ -6,36 +6,13 @@ show tables;
 
 show databases;
 
-##TABELA ESTADO
-create table tbl_estado(
-	id int auto_increment not null primary key,
-    nome varchar(255),
-    
-    unique index(id)
-);
-
-##TABELA CIDADE
-create table tbl_cidade(
-	id int auto_increment not null primary key,
-    nome varchar(255),
-    id_estado int not null,
-    
-    constraint FK_Estado_Cidade
-    foreign key (id_estado)
-    references tbl_estado(id),
-    
-    unique index(id)
-);
 
 ##TABELA LOCALIZACAO
 create table tbl_localizacao(
 	id int auto_increment not null primary key,
-    bairro varchar(100) not null,
-    id_cidade int not null,
-    
-    constraint FK_Cidade_Localizacao
-    foreign key (id_cidade)
-    references tbl_cidade(id),
+    bairro varchar(255) not null,
+    cidade varchar(255) not null,
+    estado varchar(255) not null,
     
     unique index(id)
 );
@@ -45,7 +22,7 @@ create table tbl_usuario(
 	id int auto_increment not null primary key,
     nome varchar(255),
     descricao varchar(255),
-    foto varchar(500),
+    foto text,
     nome_de_usuario varchar(100) not null,
     email varchar(255) not null,
     senha varchar(515) not null,
@@ -63,7 +40,7 @@ create table tbl_usuario(
 ##TABELA REDE SOCIAL
 create table tbl_rede_social(
 	id int auto_increment not null primary key,
-    link varchar(500),
+    link text,
     id_usuario int not null,
     
     constraint FK_Usuario_RedeSocial
@@ -116,7 +93,7 @@ create table tbl_conversa(
 create table tbl_tag(
 	id int auto_increment not null primary key,
     nome varchar(100) not null,
-    imagem varchar(500) not null,
+    imagem text not null,
     
     unique index(id)
 );
@@ -168,7 +145,7 @@ create table tbl_publicacao(
 	id int auto_increment not null primary key,
     titulo varchar(45) not null,
     descricao text not null,
-    anexo varchar(500) not null,
+    anexo text not null,
     data_publicacao date not null,
     hora time not null, 
     id_usuario int not null,
