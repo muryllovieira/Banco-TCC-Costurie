@@ -1,3 +1,5 @@
+drop database if exists db_tcc_costurie;
+
 create database db_tcc_costurie;
 
 use db_tcc_costurie;
@@ -20,8 +22,8 @@ create table tbl_localizacao(
 ##TABELA USUARIO
 create table tbl_usuario(
 	id int auto_increment not null primary key,
-    nome varchar(255),
-    descricao varchar(255),
+    nome varchar(255) default '' not null,
+    descricao varchar(255) default '' not null,
     foto text,
     nome_de_usuario varchar(100) not null,
     email varchar(255) not null,
@@ -36,6 +38,7 @@ create table tbl_usuario(
     
     unique index(id)
 );
+    
 
 ##TABELA REDE SOCIAL
 create table tbl_rede_social(

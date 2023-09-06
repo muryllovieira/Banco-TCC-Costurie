@@ -65,4 +65,21 @@ delete from tbl_usuario where id = 10;
 
 
 
+################ CATEGORIA ################
+
+#INSERT 
+insert into tbl_categoria(nome) values ('Vestuário');
+insert into tbl_categoria(nome) values ('Acessórios');
+insert into tbl_categoria(nome) values ('Ajustes e Reparos');
+insert into tbl_categoria(nome) values ('Decoração');
+insert into tbl_categoria(nome) values ('Artesanato');
+insert into tbl_categoria(nome) values ('Pets');
+
+#SELECT
+select * from tbl_categoria;
+
+
+
 ################ TAG ################
+
+#INSERT
