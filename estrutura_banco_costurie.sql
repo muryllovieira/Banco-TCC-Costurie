@@ -1,3 +1,5 @@
+drop database if exists db_tcc_costurie;
+
 create database db_tcc_costurie;
 
 use db_tcc_costurie;
@@ -6,36 +8,13 @@ show tables;
 
 show databases;
 
-##TABELA ESTADO
-create table tbl_estado(
-	id int auto_increment not null primary key,
-    nome varchar(255),
-    
-    unique index(id)
-);
-
-##TABELA CIDADE
-create table tbl_cidade(
-	id int auto_increment not null primary key,
-    nome varchar(255),
-    id_estado int not null,
-    
-    constraint FK_Estado_Cidade
-    foreign key (id_estado)
-    references tbl_estado(id),
-    
-    unique index(id)
-);
 
 ##TABELA LOCALIZACAO
 create table tbl_localizacao(
 	id int auto_increment not null primary key,
-    bairro varchar(100) not null,
-    id_cidade int not null,
-    
-    constraint FK_Cidade_Localizacao
-    foreign key (id_cidade)
-    references tbl_cidade(id),
+    bairro varchar(255) not null,
+    cidade varchar(255) not null,
+    estado varchar(255) not null,
     
     unique index(id)
 );
@@ -43,15 +22,15 @@ create table tbl_localizacao(
 ##TABELA USUARIO
 create table tbl_usuario(
 	id int auto_increment not null primary key,
-    nome varchar(255),
-    descricao varchar(255),
-    foto varchar(500),
+    nome varchar(255) default '' not null,
+    descricao varchar(255) default '' not null,
+    foto text,
     nome_de_usuario varchar(100) not null,
     email varchar(255) not null,
     senha varchar(515) not null,
     token varchar(10),
     tempo_expiracao time,
-    id_localizacao int not null,
+    id_localizacao int,
     
     constraint FK_Localizacao_Usuario
     foreign key (id_localizacao)
@@ -59,11 +38,12 @@ create table tbl_usuario(
     
     unique index(id)
 );
+    
 
 ##TABELA REDE SOCIAL
 create table tbl_rede_social(
 	id int auto_increment not null primary key,
-    link varchar(500),
+    link text,
     id_usuario int not null,
     
     constraint FK_Usuario_RedeSocial
@@ -112,15 +92,6 @@ create table tbl_conversa(
     unique index(id)
 );
 
-##TABELA TAG
-create table tbl_tag(
-	id int auto_increment not null primary key,
-    nome varchar(100) not null,
-    imagem varchar(500) not null,
-    
-    unique index(id)
-);
-
 ##TABELA CATEGORIA
 create table tbl_categoria(
 	id int auto_increment not null primary key,
@@ -129,19 +100,16 @@ create table tbl_categoria(
     unique index(id)
 );
 
-##TABELA CATEGORIA_TAG
-create table tbl_categoria_tag(
+##TABELA TAG
+create table tbl_tag(
 	id int auto_increment not null primary key,
+    nome varchar(100) not null,
+    imagem text not null,
     id_categoria int not null,
-    id_tag int not null,
     
-    constraint FK_Categoria_CategoriaTag
+    constraint FK_Categoria_Tag
     foreign key (id_categoria)
     references tbl_categoria(id),
-    
-    constraint FK_Tag_CategoriaTag
-    foreign key (id_tag)
-    references tbl_tag(id),
     
     unique index(id)
 );
@@ -168,7 +136,7 @@ create table tbl_publicacao(
 	id int auto_increment not null primary key,
     titulo varchar(45) not null,
     descricao text not null,
-    anexo varchar(500) not null,
+    anexo text not null,
     data_publicacao date not null,
     hora time not null, 
     id_usuario int not null,
@@ -292,18 +260,3 @@ create table tbl_denuncia_tipo_denuncia(
 
 	unique index(id)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

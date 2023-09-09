@@ -55,7 +55,7 @@ update tbl_usuario set
                     nome_de_usuario = '',
 					email = '',
                     senha = ''
-                where id = 7;
+                where id = 4;
                 
 #UPDATE SENHA - ESQUECI SENHA
 update tbl_usuario set senha = 'amopeitos' where id = 12;
