@@ -4,7 +4,7 @@ create database db_tcc_costurie;
 
 use db_tcc_costurie;
 
-show tables;
+ 
 
 show databases;
 

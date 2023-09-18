@@ -5,6 +5,7 @@ use db_tcc_costurie;
 show tables;
 
 
+
 ################ LOCALIZACAO ################
 
 #INSERTS
@@ -16,14 +17,22 @@ insert into tbl_localizacao(bairro, cidade, estado) values ('Niteroi', 'Rio', 'R
 #SELECT
 select * from tbl_localizacao;
 
-            
-            
-            
+ALTER TABLE tbl_usuario AUTO_INCREMENT = 1;
+
 ################ USUARIO ################
 
 #INSERT
 insert into tbl_usuario(nome_de_usuario, email, senha) values ('mumuzin15', 'mumuzi@gmail.com', '12345678');
 insert into tbl_usuario(nome_de_usuario, email, senha) values ('andrezito', 'andredograu@gmail.com', '123456789');
+
+#USUARIOS COMPLETOS
+insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('André', 'Trabalho fazendo roupas com o tema de moda infantil', 'url','andrezito', 'andredograu@gmail.com', '123456789', 1);
+insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('Luiz', 'Trabalho fazendo tricô', 'url', 'lulis', 'luiz@gmail.com', 'luiz123', 2);
+insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('Tiago', 'Trabalho com tapetes personalizados para festa', 'url', 'tigas', 'tiago@gmail.com', 'tiago123', 3);
+
+
+
+
 insert into tbl_usuario(
 						nome, 
                         descricao, 
@@ -644,7 +653,65 @@ insert into tbl_tag(
                         6);
 				
 #SELECT
-select tbl_tag.id, tbl_tag.nome, tbl_tag.imagem, tbl_categoria.nome
+select tbl_tag.id, tbl_tag.nome, tbl_tag.imagem, tbl_categoria.id as iD_categoria, tbl_categoria.nome as nome_categoria
 	from tbl_tag
 		inner join tbl_categoria
 			on tbl_tag.id_categoria = tbl_categoria.id;
+            
+            
+################ TAG_USUARIO ################
+#INSERT
+insert into tbl_tag_usuario (id_tag, id_usuario) values (11, 70);
+insert into tbl_tag_usuario (id_tag, id_usuario) values (41, 71);
+insert into tbl_tag_usuario (id_tag, id_usuario) values (42, 72);
+
+select * from tbl_tag_usuario;
+
+#SELECT
+select  tbl_usuario.id as id_usuario,
+		tbl_usuario.nome as nome,
+		tbl_usuario.descricao as descricao,
+        tbl_usuario.foto as foto,
+        tbl_usuario.nome_de_usuario as nome_de_usuario,
+        tbl_usuario.email as email,
+        tbl_usuario.senha as senha, 
+        tbl_usuario.id_localizacao as id_localizacao,
+		tbl_localizacao.bairro as bairro,
+        tbl_localizacao.cidade as cidade,
+        tbl_localizacao.estado as estado,
+        tbl_tag.id as id_tag,
+        tbl_tag.nome as nome_tag,
+        tbl_tag.imagem as imagem_tag,
+        tbl_categoria.id as id_categoria,
+        tbl_categoria.nome as nome_categoria
+from tbl_usuario
+	inner join tbl_localizacao
+		on tbl_localizacao.id = tbl_usuario.id_localizacao
+	inner join tbl_tag_usuario
+		on tbl_tag_usuario.id_usuario = tbl_usuario.id
+	inner join tbl_tag
+		on tbl_tag.id = tbl_tag_usuario.id_tag
+	inner join tbl_categoria
+		on tbl_categoria.id= tbl_tag.id_categoria;
+
+
+select * from tbl_usuario;
+
+
+DELIMITER //
+CREATE TRIGGER delete_usuario_on_tag_usuario
+BEFORE DELETE ON tbl_usuario
+FOR EACH ROW
+BEGIN
+    DELETE FROM tbl_tag_usuario WHERE id_usuario = OLD.id;
+END;
+//
+DELIMITER ;
+
+
+
+
+
+
+
+
