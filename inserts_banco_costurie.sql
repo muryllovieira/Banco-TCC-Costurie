@@ -664,6 +664,7 @@ select tbl_tag.id, tbl_tag.nome, tbl_tag.imagem, tbl_categoria.id as iD_categori
 insert into tbl_tag_usuario (id_tag, id_usuario) values (11, 70);
 insert into tbl_tag_usuario (id_tag, id_usuario) values (41, 71);
 insert into tbl_tag_usuario (id_tag, id_usuario) values (42, 72);
+insert into tbl_tag_usuario (id_tag, id_usuario) values (43, 72);
 
 select * from tbl_tag_usuario;
 
@@ -697,18 +698,11 @@ from tbl_usuario
 
 select * from tbl_usuario;
 
-
-DELIMITER //
-CREATE TRIGGER delete_usuario_on_tag_usuario
-BEFORE DELETE ON tbl_usuario
-FOR EACH ROW
-BEGIN
-    DELETE FROM tbl_tag_usuario WHERE id_usuario = OLD.id;
-END;
-//
-DELIMITER ;
-
-
+select tbl_tag.id as id_tag, tbl_tag.nome as nome, tbl_tag.imagem as imagem, tbl_categoria.id as id_categoria, tbl_categoria.nome  
+from tbl_tag
+	inner join tbl_categoria
+		on tbl_tag.id_categoria = tbl_categoria.id
+where tbl_tag.id = 2;
 
 
 
