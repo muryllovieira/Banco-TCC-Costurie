@@ -77,7 +77,7 @@ use db_tcc_costurie;
 DELIMITER //
 create procedure sp_update_endereco_usuario_tag(
 	id_usuario int,
-    id_endereco int,
+    id_localizacao int,
     bairro varchar(255),
     cidade varchar(255), 
     estado varchar(255),
@@ -91,15 +91,17 @@ begin
         tbl_localizacao.cidade = cidade,
         tbl_localizacao.bairro = bairro,
         tbl_localizacao.estado = estado
-	where tbl_localizacao.id = id_endereco;
+	where tbl_localizacao.id = id_localizacao;
         
 	update tbl_usuario as usuario set
 		usuario.nome = nome,
         usuario.descricao = descricao,
         usuario.foto = foto,
-        usuario.nome_de_usuario = nome_de_usuario
+        usuario.nome_de_usuario = nome_de_usuario,
+        usuario.id_localizacao = id_localizacao
     where usuario.id = id_usuario;
     
 end //
 DELIMITER ;
 
+drop procedure sp_update_endereco_usuario_tag;

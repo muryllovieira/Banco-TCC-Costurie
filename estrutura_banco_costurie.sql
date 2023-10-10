@@ -4,7 +4,7 @@ create database db_tcc_costurie;
 
 use db_tcc_costurie;
 
- 
+select * from tbl_categoria;
 
 show databases;
 

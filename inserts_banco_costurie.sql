@@ -50,6 +50,7 @@ insert into tbl_usuario(
 
 desc tbl_usuario;
 
+
 #SELECT
 select * from tbl_usuario where id = 3;
 select * from tbl_usuario;
@@ -83,6 +84,7 @@ insert into tbl_categoria(nome) values ('Ajustes e Reparos');
 insert into tbl_categoria(nome) values ('Decoração');
 insert into tbl_categoria(nome) values ('Artesanato');
 insert into tbl_categoria(nome) values ('Pets');
+insert into tbl_categoria(nome) values ('Geral');
 
 #SELECT
 select * from tbl_categoria;
@@ -658,6 +660,11 @@ select tbl_tag.id, tbl_tag.nome, tbl_tag.imagem, tbl_categoria.id as iD_categori
 		inner join tbl_categoria
 			on tbl_tag.id_categoria = tbl_categoria.id;
             
+#UPDATE
+update tbl_categoria set nome = 'Ajustes' where id = 3;
+
+select * from tbl_categoria;
+            
             
 ################ TAG_USUARIO ################
 #INSERT
@@ -694,6 +701,23 @@ from tbl_usuario
 		on tbl_tag.id = tbl_tag_usuario.id_tag
 	inner join tbl_categoria
 		on tbl_categoria.id= tbl_tag.id_categoria;
+        
+        
+#SELECT
+select  tbl_usuario.id as id_usuario,
+		tbl_usuario.nome as nome,
+		tbl_usuario.descricao as descricao,
+        tbl_usuario.foto as foto,
+        tbl_usuario.nome_de_usuario as nome_de_usuario,
+        tbl_usuario.email as email,
+        tbl_usuario.senha as senha, 
+        tbl_usuario.id_localizacao as id_localizacao,
+		tbl_localizacao.bairro as bairro,
+        tbl_localizacao.cidade as cidade,
+        tbl_localizacao.estado as estado
+from tbl_usuario
+	inner join tbl_localizacao
+		on tbl_localizacao.id = tbl_usuario.id_localizacao;
 
 
 select * from tbl_usuario;
