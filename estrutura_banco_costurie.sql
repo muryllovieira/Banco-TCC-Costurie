@@ -1,10 +1,9 @@
-drop database if exists db_tcc_costurie;
+#drop database if exists db_tcc_costurie;
+-- drop database db_tcc_costurie;
 
 create database db_tcc_costurie;
 
 use db_tcc_costurie;
-
-select * from tbl_categoria;
 
 show databases;
 
@@ -136,7 +135,6 @@ create table tbl_publicacao(
 	id int auto_increment not null primary key,
     titulo varchar(45) not null,
     descricao text not null,
-    anexo text not null,
     data_publicacao date not null,
     hora time not null, 
     id_usuario int not null,
@@ -144,6 +142,19 @@ create table tbl_publicacao(
     constraint FK_Usuario_Publicacao
     foreign key (id_usuario)
     references tbl_usuario(id),
+    
+    unique index(id)
+);
+
+##TABELA ANEXO PUBLICACAO
+create table tbl_anexo_publicacao(
+	id int auto_increment not null primary key,
+    anexo varchar(5000) not null,
+    id_publicacao int not null,
+    
+    constraint FK_Publicacao_Anexo
+    foreign key (id_publicacao)
+    references tbl_publicacao(id),
     
     unique index(id)
 );

@@ -27,8 +27,8 @@ insert into tbl_usuario(nome_de_usuario, email, senha) values ('andrezito', 'and
 
 #USUARIOS COMPLETOS
 insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('André', 'Trabalho fazendo roupas com o tema de moda infantil', 'url','andrezito', 'andredograu@gmail.com', '123456789', 1);
-insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('Luiz', 'Trabalho fazendo tricô', 'url', 'lulis', 'luiz@gmail.com', 'luiz123', 2);
-insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('Tiago', 'Trabalho com tapetes personalizados para festa', 'url', 'tigas', 'tiago@gmail.com', 'tiago123', 3);
+insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('Luiz', 'Trabalho fazendo tricô', 'url', 'lulis', 'luiz@gmail.com', 'Luiz@123', 2);
+insert into tbl_usuario(nome, descricao, foto, nome_de_usuario, email, senha, id_localizacao) values ('Tiago', 'Trabalho com tapetes personalizados para festa', 'url', 'Tigas@123', 'tiago@gmail.com', 'tiago123', 3);
 
 
 
@@ -145,7 +145,7 @@ insert into tbl_tag(
                         imagem, 
                         id_categoria
                         ) values (
-                        'Lingirie',
+                        'Lingerie',
 						'https://img.freepik.com/free-photo/female-lingerie-arrangement-still-life_23-2150411287.jpg?w=360&t=st=1694352038~exp=1694352638~hmac=11698d6c07c4c4ec52fd4de578d2a1c429f5ea2072c7850f1c83565d6ad3379f',
                         1);
                         
@@ -190,7 +190,7 @@ insert into tbl_tag(
                         imagem, 
                         id_categoria
                         ) values (
-                        'Bebê e Crianças',
+                        'Bebês e Crianças',
 						'https://img.freepik.com/free-photo/flat-lay-baby-clothes-with-photo-camera_23-2148251466.jpg?w=740&t=st=1694352180~exp=1694352780~hmac=e65a3ac99bfccc811a32c6c43341e588bc7adcce8a292a8cf61e77cb7222122b',
                         1);
                         
@@ -401,7 +401,7 @@ insert into tbl_tag(
                         imagem, 
                         id_categoria
                         ) values (
-                        'Ragos',
+                        'Rasgos',
 						'https://img.freepik.com/free-photo/woman-doing-jeans-patchwork-using-sewing-machine-home-diy-sewing-concept_1150-6480.jpg?w=740&t=st=1694353289~exp=1694353889~hmac=4df09326e6234054a41d3969a1466c768e6adefad176a36dc4630f5274515904',
                         3);
                         
@@ -668,12 +668,14 @@ select * from tbl_categoria;
             
 ################ TAG_USUARIO ################
 #INSERT
-insert into tbl_tag_usuario (id_tag, id_usuario) values (11, 70);
-insert into tbl_tag_usuario (id_tag, id_usuario) values (41, 71);
-insert into tbl_tag_usuario (id_tag, id_usuario) values (42, 72);
-insert into tbl_tag_usuario (id_tag, id_usuario) values (43, 72);
+insert into tbl_tag_usuario (id_tag, id_usuario) values (2, 2);
+insert into tbl_tag_usuario (id_tag, id_usuario) values (1, 3);
+insert into tbl_tag_usuario (id_tag, id_usuario) values (2, 3);
+insert into tbl_tag_usuario (id_tag, id_usuario) values (3, 1);
 
 select * from tbl_tag_usuario;
+
+select * from tbl_usuario;
 
 #SELECT
 
@@ -732,6 +734,21 @@ from tbl_tag
 		on tbl_tag.id_categoria = tbl_categoria.id
 where tbl_tag.id = 2;
 
+
+##PUBLICACAO
+insert into tbl_publicacao (
+                            titulo,
+                            data_publicacao,
+                            hora,
+                            descricao,
+                            id_usuario
+                            ) values (
+									'Teste 123',
+                                    DATE(NOW()),
+                                    TIME(NOW()),
+                                    'Fazendo um crochê lindoooooooo',
+                                    2
+									);
 
 
 

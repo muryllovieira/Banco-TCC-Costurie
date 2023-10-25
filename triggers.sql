@@ -1,23 +1,26 @@
 use db_tcc_costurie;
 
-#TRIGGER PARA DELETAR DA TABELA DE TAG_USUARIO
-DELIMITER //
-CREATE TRIGGER delete_usuario_on_tag_usuario
-BEFORE DELETE ON tbl_usuario
-FOR EACH ROW
-BEGIN
-    DELETE FROM tbl_tag_usuario WHERE id_usuario = OLD.id;
-END;
-//
-DELIMITER ;
+show triggers;
 
-#TRIGGER PARA DELETAR DA PUBLICACAO DO USUARIO
+drop trigger trg_apagar_publicacao;
+
+
+##ARRUMAR ESSA TRIGGER PARA TAG TBM
 DELIMITER //
-CREATE TRIGGER delete_publicacao_on_usuario
-BEFORE DELETE ON tbl_usuario
+
+CREATE TRIGGER trg_apagar_publicacao
+BEFORE DELETE ON tbl_publicacao
 FOR EACH ROW
 BEGIN
-    DELETE FROM tbl_publicacao WHERE id = OLD.id;
+    DECLARE publicacao_id INT;
+    
+    # Pegar o ID que esta sendo deletado
+    SET publicacao_id = OLD.id;
+
+    # Remover da tabela de anexo
+    DELETE FROM tbl_anexo_publicacao WHERE id_publicacao = publicacao_id;
+
 END;
 //
+
 DELIMITER ;
