@@ -4,7 +4,9 @@ use db_tcc_costurie;
 
 show tables;
 
+select * from tbl_publicacao;
 
+delete from tbl_publicacao where id = 51; 
 
 ################ LOCALIZACAO ################
 
