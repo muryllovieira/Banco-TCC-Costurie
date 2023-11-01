@@ -69,27 +69,42 @@ create table tbl_recomendacao(
     unique index(id)
 );
 
-##TABELA CHAT
-create table tbl_chat(
-	id_mongo varchar(255) primary key not null
-);
+-- ##TABELA CHAT
+-- create table tbl_chat(
+-- 	id_mongo varchar(255) primary key not null
+-- );
 
-##TABELA CONVERSA
-create table tbl_conversa(
-	id int auto_increment not null primary key,
+-- ##TABELA CONVERSA
+-- create table tbl_conversa(
+-- 	id int auto_increment not null primary key,
+--     id_usuario int not null,
+--     id_mongo varchar(255),
+--     
+--     constraint FK_Usuario_Conversa
+--     foreign key (id_usuario)
+--     references tbl_usuario(id),
+--     
+--     constraint FK_MongoChat_Conversa
+--     foreign key (id_mongo)
+--     references tbl_chat(id_mongo),
+--     
+--     unique index(id)
+-- );
+
+#TBL_CHAT
+create table tbl_chat(
+	id int primary key auto_increment not null,
+    status_usuario bit default 1 not null,
+	id_mongo varchar(255) not null,
     id_usuario int not null,
-    id_mongo varchar(255),
     
-    constraint FK_Usuario_Conversa
+    constraint FK_Usuario_Chat
     foreign key (id_usuario)
     references tbl_usuario(id),
     
-    constraint FK_MongoChat_Conversa
-    foreign key (id_mongo)
-    references tbl_chat(id_mongo),
-    
-    unique index(id)
+    unique index (id)
 );
+
 
 ##TABELA CATEGORIA
 create table tbl_categoria(
@@ -177,14 +192,26 @@ create table tbl_tag_publicacao(
 );
 
 ##TABELA AVALIACAO
-create table tbl_avaliacao(
+create table tbl_avaliacao_tag(
 	id int auto_increment not null primary key,
-    quantidade bit,
+    curtida bit,
     id_tag_publicacao int not null,
     
     constraint FK_TagPublicao_Avaliacao
     foreign key (id_tag_publicacao)
     references tbl_tag_publicacao(id),
+    
+    unique index(id)
+);
+
+create table tbl_avaliacao_publicacao(
+	id int auto_increment not null primary key,
+    curtida bit,
+    id_publicacao int not null,
+    
+    constraint FK_Publicacao_Avaliacao
+    foreign key (id_publicacao)
+    references tbl_publicacao(id),
     
     unique index(id)
 );
