@@ -197,12 +197,15 @@ create table tbl_avaliacao_tag(
     curtida bit,
     id_tag_publicacao int not null,
     
-    constraint FK_TagPublicao_Avaliacao
-    foreign key (id_tag_publicacao)
-    references tbl_tag_publicacao(id),
+	CONSTRAINT FK_TagPublicao_Avaliacao
+	FOREIGN KEY (id_tag_publicacao)
+	REFERENCES tbl_tag_publicacao (id)
+	ON DELETE CASCADE,
+
     
     unique index(id)
 );
+
 
 create table tbl_avaliacao_publicacao(
 	id int auto_increment not null primary key,
