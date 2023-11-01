@@ -751,6 +751,8 @@ insert into tbl_publicacao (
 									);
 
 
+delete from tbl_publicacao where id <= 80;
 
+select * from tbl_publicacao;
 
 

@@ -19,7 +19,13 @@ BEGIN
 
     # Remover da tabela de anexo
     DELETE FROM tbl_anexo_publicacao WHERE id_publicacao = publicacao_id;
+    
+    # Remover da tabela de avaliacao tag
+    DELETE FROM tbl_avaliacao_tag WHERE id_tag_publicacao = publicacao_id;
 
+	# Remover da tabela de publicacao tag
+    DELETE FROM tbl_tag_publicacao WHERE id_publicacao = publicacao_id;
+    
 END;
 //
 
