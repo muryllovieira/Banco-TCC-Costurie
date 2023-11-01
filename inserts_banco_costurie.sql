@@ -4,7 +4,9 @@ use db_tcc_costurie;
 
 show tables;
 
+select * from tbl_publicacao;
 
+delete from tbl_publicacao where id = 51; 
 
 ################ LOCALIZACAO ################
 
@@ -751,7 +753,7 @@ insert into tbl_publicacao (
 									);
 
 
-delete from tbl_publicacao where id <= 80;
+delete from tbl_publicacao where id <= 89;
 
 select * from tbl_publicacao;
 
