@@ -211,13 +211,19 @@ create table tbl_avaliacao_publicacao(
 	id int auto_increment not null primary key,
     curtida bit,
     id_publicacao int not null,
+    id_usuario int not null,
     
     constraint FK_Publicacao_Avaliacao
     foreign key (id_publicacao)
     references tbl_publicacao(id),
     
+    constraint FK_Usuario_Avaliacao 
+    foreign key (id_usuario) 
+    references tbl_usuario(id),
+    
     unique index(id)
 );
+
 
 ##TABELA COMENTARIO
 create table tbl_comentario(
