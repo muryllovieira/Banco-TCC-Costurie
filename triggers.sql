@@ -49,3 +49,19 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+SHOW CREATE TRIGGER delete_usuario_on_tag_usuario;
+drop trigger delete_usuario_on_tag_usuario;
+
+## TRIGGER PARA APAGAR UM USUARIO
+DELIMITER //
+CREATE TRIGGER delete_usuario_on_tag_usuario 
+BEFORE DELETE ON tbl_usuario 
+FOR EACH ROW 
+BEGIN
+    DELETE FROM tbl_tag_usuario WHERE id_usuario = OLD.id;
+    
+    DELETE FROM tbl_publicacao WHERE id_usuario = OLD.id;
+END;
+//
+DELIMITER ;

@@ -755,6 +755,11 @@ insert into tbl_publicacao (
 
 delete from tbl_publicacao where id <= 89;
 
-select * from tbl_publicacao;
+select * from tbl_usuario;
 
+show tables;
+
+drop table tags_usuario;
+
+select * from tbl_chat;
 
