@@ -62,6 +62,16 @@ BEGIN
     DELETE FROM tbl_tag_usuario WHERE id_usuario = OLD.id;
     
     DELETE FROM tbl_publicacao WHERE id_usuario = OLD.id;
+    
+    DELETE FROM tbl_avaliacao_publicacao WHERE id_usuario = OLD.id;
+    
+    DELETE FROM tbl_chat WHERE id_usuario = OLD.id;
+    
+    DELETE FROM tbl_comentario WHERE id_usuario = OLD.id;
+    
+    DELETE FROM tbl_resposta_comentario WHERE id_usuario = OLD.id;
+    
+    DELETE FROM tbl_denuncia WHERE id_usuario = OLD.id;
 END;
 //
 DELIMITER ;

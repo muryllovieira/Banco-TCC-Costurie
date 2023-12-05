@@ -73,7 +73,7 @@ update tbl_usuario set
 update tbl_usuario set foto = 'https://firebasestorage.googleapis.com/v0/b/costurie-images.appspot.com/o/img%2Felderwood-azir-splash-art-lol-uhdpaper.com-8K-8.1800%20(1).jpg?alt=media&token=a2f01705-fa19-4976-b7fb-160f094d4f53' where id = 72;
 
 #DELETE
-delete from tbl_usuario where id = 10;
+delete from tbl_usuario where id = 37;
 
 
 
@@ -754,6 +754,8 @@ insert into tbl_publicacao (
 
 
 delete from tbl_publicacao where id <= 89;
+
+select * from tbl_publicacao;
 
 select * from tbl_usuario;
 
